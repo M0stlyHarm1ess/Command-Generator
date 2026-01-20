@@ -1746,6 +1746,7 @@
             });
             
             filteredCommands.forEach(command => {
+                // 使用正确的正则表达式匹配变量格式
                 const matches = command.template.match(/\$\{\{([A-Za-z0-9_]+)\}\}/g) || [];
                 matches.forEach(match => {
                     // 去掉${{和}}符号，并转换为大写
@@ -2183,6 +2184,7 @@
                             <button onclick="deleteVariable('${name}')" class="delete-btn" style="padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 500; border-radius: 6px; white-space: nowrap;">删除</button>
                         </div>
                     `;
+                    variableItem.dataset.varName = name;
                     listElement.appendChild(variableItem);
                 });
             }
@@ -3179,40 +3181,57 @@
             input.focus();
             input.select();
             
-            // 失去焦点时保存
-            input.addEventListener('blur', () => {
-                saveVariable(parent, input.value);
-            });
-            
-            // 按下Enter键保存
-            input.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
+            // 创建保存函数，确保只执行一次
+            let saved = false;
+            const saveAction = () => {
+                if (!saved) {
+                    saved = true;
+                    // 先移除事件监听器，防止重复触发
+                    input.removeEventListener('blur', saveAction);
+                    input.removeEventListener('keypress', handleKeyPress);
                     saveVariable(parent, input.value);
                 }
-            });
+            };
+            
+            // 按下Enter键保存
+            const handleKeyPress = (e) => {
+                if (e.key === 'Enter') {
+                    saveAction();
+                }
+            };
+            
+            // 添加事件监听器
+            input.addEventListener('blur', saveAction);
+            input.addEventListener('keypress', handleKeyPress);
         }
 
         // 保存变量值
         function saveVariable(parent, newValue) {
-            const variableName = parent.querySelector('.variable-name').textContent;
+            // 获取data-varName属性值作为变量名，确保使用大写
+            const originalVariableName = parent.dataset.varName;
+            const variableName = originalVariableName.toUpperCase();
             const div = document.createElement('div');
             div.className = 'variable-value';
             div.textContent = newValue;
             div.onclick = () => editVariable(div);
             
-            parent.replaceChild(div, parent.querySelector('input'));
-            
-            // 更新变量存储
-            variables[variableName] = newValue;
-            
-            // 保存数据到localStorage
-            saveData();
-            
-            // 更新所有命令
-            updateCommands();
-            
-            // 更新变量管理列表
-            updateVariableManagementList();
+            // 检查输入框是否还存在于DOM中，避免重复保存导致的错误
+            const input = parent.querySelector('input');
+            if (input) {
+                parent.replaceChild(div, input);
+                
+                // 更新变量存储，始终使用大写的变量名
+                variables[variableName] = newValue;
+                
+                // 保存数据到localStorage
+                saveData();
+                
+                // 更新所有命令
+                updateCommands();
+                
+                // 更新变量管理列表
+                updateVariableManagementList();
+            }
         }
 
 
@@ -3281,19 +3300,19 @@
                 let commandText = command.template;
                 
                 // 替换所有变量 - 使用${{变量名}}格式
-                // 先提取命令模板中的所有变量名，转换为大写后替换
-                const matches = command.template.match(/\\$\\{\\{([A-Za-z0-9_]+)\\}\\}/g) || [];
-                matches.forEach(match => {
-                    // 提取变量名并转换为大写
-                    const varName = match.substring(3, match.length - 2).toUpperCase();
-                    // 获取变量值
+                // 直接使用replace方法的回调函数替换所有变量
+                // 使用简单的字符串替换方法
+                commandText = command.template;
+                
+                // 遍历variables对象，替换所有变量
+                for (const varName in variables) {
+                    // 创建匹配模式，例如${{USER_NAME}}
+                    const pattern = `\${{${varName}}}`;
+                    // 创建替换值
                     const value = variables[varName];
-                    // 如果变量值为空，使用占位符
-                    const replaceValue = value || `[${varName}_PLACEHOLDER]`;
-                    // 替换命令模板中的变量
-                    const regex = new RegExp(`\\$\\{\\{${match.substring(3, match.length - 2)}\\}\\}`, 'g');
-                    commandText = commandText.replace(regex, replaceValue);
-                });
+                    // 替换所有匹配的变量
+                    commandText = commandText.split(pattern).join(value);
+                }
                 
                 let descriptionHtml = '';
                 if (command.description) {
