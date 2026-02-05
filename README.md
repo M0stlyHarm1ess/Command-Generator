@@ -44,6 +44,21 @@ Freely change the order of commands according to your preferences.
 Command previews update instantly while editing variables
 
 
+## ScreenShot
+
+
+<img width="2875" height="1564" alt="image" src="https://github.com/user-attachments/assets/90dad8ba-385a-485e-ae0c-72f1a3e23092" />
+
+<img width="2854" height="1523" alt="image" src="https://github.com/user-attachments/assets/93027cd7-b2c3-440d-b5a1-c366ad720fee" />
+
+<img width="2887" height="1572" alt="image" src="https://github.com/user-attachments/assets/d8df909f-11f6-4407-b24e-03eb2c79dfc2" />
+
+<img width="2863" height="1523" alt="image" src="https://github.com/user-attachments/assets/1c1ea44c-a5ae-41a9-81da-04e4fa6dd88d" />
+
+<img width="2840" height="1545" alt="image" src="https://github.com/user-attachments/assets/0b349032-1320-4587-af6a-df8a74f9f8ed" />
+
+
+
 ## How to Start
 
 1. Download the `command-generator.html` file
@@ -128,6 +143,28 @@ All data is stored in your browser's LocalStorage, which means:
 
 - Clearing your browser's localStorage will delete all saved commands and variables
 
+
+## Changelog
+
+
+### V0.4
+
+- Added support for multiple languages such as English.
+- Improved the UI for small-screen devices.
+
+### V0.3
+
+- Fixed some bugs.
+- Added support for multiple commands and scripts.
+
+### V0.2
+
+- Added column and sorting features 
+- Designed a more modern UI.
+
+### V0.1
+
+The basic functionality has been implemented.
 
 
 
