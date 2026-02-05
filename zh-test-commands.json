@@ -1,0 +1,283 @@
+{
+  "variables": {
+    "HOSTNAME": "localhost",
+    "PORT": "8080",
+    "USERNAME": "admin",
+    "PASSWORD": "password",
+    "DATABASE": "testdb",
+    "FILEPATH": "/path/to/file",
+    "DIRECTORY": "/path/to/directory",
+    "IP_ADDRESS": "192.168.1.1",
+    "DOMAIN": "example.com",
+    "LOG_FILE": "/var/log/syslog"
+  },
+  "commands": [
+    {
+      "title": "查看系统信息",
+      "description": "显示系统的详细信息，包括内核版本、硬件信息等",
+      "tags": ["系统信息"],
+      "template": "uname -a",
+      "columnId": "column_system",
+      "sortOrder": 0
+    },
+    {
+      "title": "查看内存使用情况",
+      "description": "显示系统内存的使用情况，包括物理内存和交换空间",
+      "tags": ["系统监控"],
+      "template": "free -h",
+      "columnId": "column_system",
+      "sortOrder": 1
+    },
+    {
+      "title": "查看磁盘使用情况",
+      "description": "显示系统磁盘分区的使用情况",
+      "tags": ["存储管理"],
+      "template": "df -h",
+      "columnId": "column_system",
+      "sortOrder": 2
+    },
+    {
+      "title": "查看CPU使用情况",
+      "description": "显示系统CPU的使用情况，包括每个核心的使用率",
+      "tags": ["系统监控"],
+      "template": "top -bn1 | head -20",
+      "columnId": "column_system",
+      "sortOrder": 3
+    },
+    {
+      "title": "查看运行中的进程",
+      "description": "显示系统中正在运行的进程",
+      "tags": ["进程管理"],
+      "template": "ps aux | grep ${{USERNAME}}",
+      "columnId": "column_system",
+      "sortOrder": 4
+    },
+    {
+      "title": "查看网络接口",
+      "description": "显示系统的网络接口信息",
+      "tags": ["网络配置"],
+      "template": "ifconfig",
+      "columnId": "column_network",
+      "sortOrder": 5
+    },
+    {
+      "title": "测试网络连接",
+      "description": "测试与指定主机的网络连接",
+      "tags": ["网络测试"],
+      "template": "ping -c 4 ${{IP_ADDRESS}}",
+      "columnId": "column_network",
+      "sortOrder": 6
+    },
+    {
+      "title": "查看路由表",
+      "description": "显示系统的路由表信息",
+      "tags": ["网络配置"],
+      "template": "route -n",
+      "columnId": "column_network",
+      "sortOrder": 7
+    },
+    {
+      "title": "查看网络连接",
+      "description": "显示系统的网络连接信息",
+      "tags": ["网络监控"],
+      "template": "netstat -tuln",
+      "columnId": "column_network",
+      "sortOrder": 8
+    },
+    {
+      "title": "DNS查询",
+      "description": "查询指定域名的DNS记录",
+      "tags": ["网络测试"],
+      "template": "nslookup ${{DOMAIN}}",
+      "columnId": "column_network",
+      "sortOrder": 9
+    },
+    {
+      "title": "查看文件内容",
+      "description": "显示指定文件的内容",
+      "tags": ["文件查看"],
+      "template": "cat ${{FILEPATH}}",
+      "columnId": "column_file",
+      "sortOrder": 10
+    },
+    {
+      "title": "创建目录",
+      "description": "创建指定的目录",
+      "tags": ["目录管理"],
+      "template": "mkdir -p ${{DIRECTORY}}",
+      "columnId": "column_file",
+      "sortOrder": 11
+    },
+    {
+      "title": "复制文件",
+      "description": "复制文件到指定位置",
+      "tags": ["文件操作"],
+      "template": "cp ${{FILEPATH}} ${{DIRECTORY}}",
+      "columnId": "column_file",
+      "sortOrder": 12
+    },
+    {
+      "title": "移动文件",
+      "description": "移动文件到指定位置",
+      "tags": ["文件操作"],
+      "template": "mv ${{FILEPATH}} ${{DIRECTORY}}",
+      "columnId": "column_file",
+      "sortOrder": 13
+    },
+    {
+      "title": "删除文件",
+      "description": "删除指定的文件",
+      "tags": ["文件操作"],
+      "template": "rm ${{FILEPATH}}",
+      "columnId": "column_file",
+      "sortOrder": 14
+    },
+    {
+      "title": "查看防火墙状态",
+      "description": "显示系统防火墙的状态",
+      "tags": ["防火墙管理"],
+      "template": "sudo ufw status",
+      "columnId": "column_security",
+      "sortOrder": 15
+    },
+    {
+      "title": "查看系统用户",
+      "description": "显示系统中的用户列表",
+      "tags": ["用户管理"],
+      "template": "cat /etc/passwd | cut -d: -f1",
+      "columnId": "column_security",
+      "sortOrder": 16
+    },
+    {
+      "title": "查看系统组",
+      "description": "显示系统中的组列表",
+      "tags": ["用户管理"],
+      "template": "cat /etc/group | cut -d: -f1",
+      "columnId": "column_security",
+      "sortOrder": 17
+    },
+    {
+      "title": "查看登录历史",
+      "description": "显示系统的登录历史记录",
+      "tags": ["安全审计"],
+      "template": "last",
+      "columnId": "column_security",
+      "sortOrder": 18
+    },
+    {
+      "title": "查看系统日志",
+      "description": "查看系统的日志文件",
+      "tags": ["日志管理"],
+      "template": "tail -n 100 ${{LOG_FILE}}",
+      "columnId": "column_security",
+      "sortOrder": 19
+    },
+    {
+      "title": "MySQL连接",
+      "description": "连接到MySQL数据库",
+      "tags": ["数据库连接"],
+      "template": "mysql -u ${{USERNAME}} -p${{PASSWORD}} -h ${{HOSTNAME}} ${{DATABASE}}",
+      "columnId": "column_database",
+      "sortOrder": 20
+    },
+    {
+      "title": "PostgreSQL连接",
+      "description": "连接到PostgreSQL数据库",
+      "tags": ["数据库连接"],
+      "template": "psql -h ${{HOSTNAME}} -U ${{USERNAME}} -d ${{DATABASE}}",
+      "columnId": "column_database",
+      "sortOrder": 21
+    },
+    {
+      "title": "MongoDB连接",
+      "description": "连接到MongoDB数据库",
+      "tags": ["数据库连接"],
+      "template": "mongo --host ${{HOSTNAME}} --port ${{PORT}} -u ${{USERNAME}} -p ${{PASSWORD}}",
+      "columnId": "column_database",
+      "sortOrder": 22
+    },
+    {
+      "title": "Redis连接",
+      "description": "连接到Redis服务器",
+      "tags": ["数据库连接"],
+      "template": "redis-cli -h ${{HOSTNAME}} -p ${{PORT}} -a ${{PASSWORD}}",
+      "columnId": "column_database",
+      "sortOrder": 23
+    },
+    {
+      "title": "查看Git状态",
+      "description": "显示Git仓库的状态",
+      "tags": ["版本控制"],
+      "template": "git status",
+      "columnId": "column_development",
+      "sortOrder": 24
+    },
+    {
+      "title": "Git提交",
+      "description": "提交Git仓库的更改",
+      "tags": ["版本控制"],
+      "template": "git commit -m \"Update: ${{MESSAGE}}\"",
+      "columnId": "column_development",
+      "sortOrder": 25
+    },
+    {
+      "title": "查看Docker容器",
+      "description": "显示Docker容器的列表",
+      "tags": ["容器管理"],
+      "template": "docker ps",
+      "columnId": "column_development",
+      "sortOrder": 26
+    },
+    {
+      "title": "启动Docker容器",
+      "description": "启动指定的Docker容器",
+      "tags": ["容器管理"],
+      "template": "docker start ${{CONTAINER_ID}}",
+      "columnId": "column_development",
+      "sortOrder": 27
+    },
+    {
+      "title": "查看Node.js版本",
+      "description": "显示Node.js的版本",
+      "tags": ["开发工具"],
+      "template": "node --version",
+      "columnId": "column_development",
+      "sortOrder": 28
+    },
+    {
+      "title": "查看Python版本",
+      "description": "显示Python的版本",
+      "tags": ["开发工具"],
+      "template": "python3 --version",
+      "columnId": "column_development",
+      "sortOrder": 29
+    }
+  ],
+  "columns": [
+    {
+      "id": "column_system",
+      "name": "系统管理"
+    },
+    {
+      "id": "column_network",
+      "name": "网络管理"
+    },
+    {
+      "id": "column_file",
+      "name": "文件管理"
+    },
+    {
+      "id": "column_security",
+      "name": "安全管理"
+    },
+    {
+      "id": "column_database",
+      "name": "数据库管理"
+    },
+    {
+      "id": "column_development",
+      "name": "开发工具"
+    }
+  ],
+  "exportDate": "2026-02-03T12:00:00.000Z"
+}

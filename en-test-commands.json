@@ -1,0 +1,310 @@
+{
+  "variables": {
+    "FILE_PATH": {
+      "name": "FILE_PATH",
+      "value": "/path/to/file",
+      "description": "File path"
+    },
+    "DIRECTORY": {
+      "name": "DIRECTORY",
+      "value": "/path/to/directory",
+      "description": "Directory path"
+    },
+    "USERNAME": {
+      "name": "USERNAME",
+      "value": "user",
+      "description": "Username"
+    },
+    "HOST": {
+      "name": "HOST",
+      "value": "example.com",
+      "description": "Hostname"
+    },
+    "PORT": {
+      "name": "PORT",
+      "value": "22",
+      "description": "Port number"
+    },
+    "DATABASE": {
+      "name": "DATABASE",
+      "value": "dbname",
+      "description": "Database name"
+    },
+    "BRANCH": {
+      "name": "BRANCH",
+      "value": "main",
+      "description": "Git branch"
+    },
+    "IMAGE": {
+      "name": "IMAGE",
+      "value": "ubuntu:latest",
+      "description": "Docker image"
+    },
+    "CONTAINER": {
+      "name": "CONTAINER",
+      "value": "my-container",
+      "description": "Docker container name"
+    }
+  },
+  "commands": [
+    {
+      "title": "List files",
+      "template": "ls -la",
+      "description": "List all files with details",
+      "tags": ["File Management"],
+      "columnId": "column_linux",
+      "sortOrder": 0
+    },
+    {
+      "title": "Change directory",
+      "template": "cd ${{DIRECTORY}}",
+      "description": "Change to specified directory",
+      "tags": ["Navigation"],
+      "columnId": "column_linux",
+      "sortOrder": 1
+    },
+    {
+      "title": "Create directory",
+      "template": "mkdir -p ${{DIRECTORY}}",
+      "description": "Create directory recursively",
+      "tags": ["File Management"],
+      "columnId": "column_linux",
+      "sortOrder": 2
+    },
+    {
+      "title": "Remove file",
+      "template": "rm ${{FILE_PATH}}",
+      "description": "Remove specified file",
+      "tags": ["File Management"],
+      "columnId": "column_linux",
+      "sortOrder": 3
+    },
+    {
+      "title": "Copy file",
+      "template": "cp ${{FILE_PATH}} ${{DIRECTORY}}",
+      "description": "Copy file to directory",
+      "tags": ["File Management"],
+      "columnId": "column_linux",
+      "sortOrder": 4
+    },
+    {
+      "title": "SSH connection",
+      "template": "ssh ${{USERNAME}}@${{HOST}} -p ${{PORT}}",
+      "description": "SSH connection to remote host",
+      "tags": ["Network"],
+      "columnId": "column_linux",
+      "sortOrder": 5
+    },
+    {
+      "title": "Check disk usage",
+      "template": "df -h",
+      "description": "Check disk usage in human readable format",
+      "tags": ["System"],
+      "columnId": "column_linux",
+      "sortOrder": 6
+    },
+    {
+      "title": "Check memory usage",
+      "template": "free -m",
+      "description": "Check memory usage in MB",
+      "tags": ["System"],
+      "columnId": "column_linux",
+      "sortOrder": 7
+    },
+    {
+      "title": "Check CPU usage",
+      "template": "top -b -n 1",
+      "description": "Check CPU usage",
+      "tags": ["System"],
+      "columnId": "column_linux",
+      "sortOrder": 8
+    },
+    {
+      "title": "Find file",
+      "template": "find ${{DIRECTORY}} -name \"*.txt\"",
+      "description": "Find text files in directory",
+      "tags": ["File Management"],
+      "columnId": "column_linux",
+      "sortOrder": 9
+    },
+    {
+      "title": "Git status",
+      "template": "git status",
+      "description": "Check git repository status",
+      "tags": ["Version Control"],
+      "columnId": "column_git",
+      "sortOrder": 10
+    },
+    {
+      "title": "Git add",
+      "template": "git add .",
+      "description": "Add all changes to git",
+      "tags": ["Version Control"],
+      "columnId": "column_git",
+      "sortOrder": 11
+    },
+    {
+      "title": "Git commit",
+      "template": "git commit -m \"Update files\"",
+      "description": "Commit changes with message",
+      "tags": ["Version Control"],
+      "columnId": "column_git",
+      "sortOrder": 12
+    },
+    {
+      "title": "Git push",
+      "template": "git push origin ${{BRANCH}}",
+      "description": "Push changes to remote",
+      "tags": ["Version Control"],
+      "columnId": "column_git",
+      "sortOrder": 13
+    },
+    {
+      "title": "Git pull",
+      "template": "git pull origin ${{BRANCH}}",
+      "description": "Pull changes from remote",
+      "tags": ["Version Control"],
+      "columnId": "column_git",
+      "sortOrder": 14
+    },
+    {
+      "title": "Git branch",
+      "template": "git branch",
+      "description": "List all branches",
+      "tags": ["Version Control"],
+      "columnId": "column_git",
+      "sortOrder": 15
+    },
+    {
+      "title": "Git checkout",
+      "template": "git checkout ${{BRANCH}}",
+      "description": "Checkout specified branch",
+      "tags": ["Version Control"],
+      "columnId": "column_git",
+      "sortOrder": 16
+    },
+    {
+      "title": "Git log",
+      "template": "git log --oneline",
+      "description": "Show git log in one line format",
+      "tags": ["Version Control"],
+      "columnId": "column_git",
+      "sortOrder": 17
+    },
+    {
+      "title": "Docker run",
+      "template": "docker run -d --name ${{CONTAINER}} ${{IMAGE}}",
+      "description": "Run docker container in detached mode",
+      "tags": ["Container"],
+      "columnId": "column_docker",
+      "sortOrder": 18
+    },
+    {
+      "title": "Docker ps",
+      "template": "docker ps",
+      "description": "List running docker containers",
+      "tags": ["Container"],
+      "columnId": "column_docker",
+      "sortOrder": 19
+    },
+    {
+      "title": "Docker stop",
+      "template": "docker stop ${{CONTAINER}}",
+      "description": "Stop specified docker container",
+      "tags": ["Container"],
+      "columnId": "column_docker",
+      "sortOrder": 20
+    },
+    {
+      "title": "Docker rm",
+      "template": "docker rm ${{CONTAINER}}",
+      "description": "Remove specified docker container",
+      "tags": ["Container"],
+      "columnId": "column_docker",
+      "sortOrder": 21
+    },
+    {
+      "title": "Docker images",
+      "template": "docker images",
+      "description": "List docker images",
+      "tags": ["Image"],
+      "columnId": "column_docker",
+      "sortOrder": 22
+    },
+    {
+      "title": "Docker rmi",
+      "template": "docker rmi ${{IMAGE}}",
+      "description": "Remove specified docker image",
+      "tags": ["Image"],
+      "columnId": "column_docker",
+      "sortOrder": 23
+    },
+    {
+      "title": "Docker build",
+      "template": "docker build -t ${{IMAGE}} .",
+      "description": "Build docker image from Dockerfile",
+      "tags": ["Image"],
+      "columnId": "column_docker",
+      "sortOrder": 24
+    },
+    {
+      "title": "MySQL connect",
+      "template": "mysql -u ${{USERNAME}} -p ${{DATABASE}}",
+      "description": "Connect to MySQL database",
+      "tags": ["Database"],
+      "columnId": "column_database",
+      "sortOrder": 25
+    },
+    {
+      "title": "PostgreSQL connect",
+      "template": "psql -U ${{USERNAME}} -d ${{DATABASE}}",
+      "description": "Connect to PostgreSQL database",
+      "tags": ["Database"],
+      "columnId": "column_database",
+      "sortOrder": 26
+    },
+    {
+      "title": "MongoDB connect",
+      "template": "mongo --username ${{USERNAME}} --password --host ${{HOST}} ${{DATABASE}}",
+      "description": "Connect to MongoDB database",
+      "tags": ["Database"],
+      "columnId": "column_database",
+      "sortOrder": 27
+    },
+    {
+      "title": "Redis connect",
+      "template": "redis-cli -h ${{HOST}} -p ${{PORT}}",
+      "description": "Connect to Redis server",
+      "tags": ["Database"],
+      "columnId": "column_database",
+      "sortOrder": 28
+    },
+    {
+      "title": "SQLite connect",
+      "template": "sqlite3 ${{DATABASE}}.db",
+      "description": "Connect to SQLite database",
+      "tags": ["Database"],
+      "columnId": "column_database",
+      "sortOrder": 29
+    }
+  ],
+  "columns": [
+    {
+      "id": "column_linux",
+      "name": "Linux"
+    },
+    {
+      "id": "column_git",
+      "name": "Git"
+    },
+    {
+      "id": "column_docker",
+      "name": "Docker"
+    },
+    {
+      "id": "column_database",
+      "name": "Database"
+    }
+  ],
+  "exportDate": "2026-02-04T00:00:00.000Z"
+}
