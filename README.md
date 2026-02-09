@@ -1,7 +1,9 @@
+## Preface
+I used AI to build this small tool; my original intention was to create a tool that could help me remember many repetitive commands, serving as a cheat sheet to pass the OSCP exam. It doesn’t have a very good engineering architecture, nor does it have elegant code style; many times I don’t even know why the code is arranged and combined the way it is, but it does indeed implement all the functionality I wanted. 
+
+So anyway, what I want to say is that it’s certainly not perfect, and it wasn’t built entirely by myself, but it works. Based on this prototype, I think I’ll spend some time actually turning it into something more like a real project.
+
 ## Command Generator - A powerful customizable command generation tool
-
-
-
 
 Command Generator is a utility-type project implemented entirely in HTML. It does not require any special environment or dependencies — it can be launched and run directly in a web browser.
 
@@ -10,9 +12,6 @@ Define your commonly used command templates and the required variables. Change t
 You can use it as your memo or notepad, especially when working with multiple tools. Let it automatically generate any text, commands, or scripts you need, instead of manually moving the cursor through large blocks of copied text to fill in IP addresses or paths.
 
 It’s  powerful, but trust me — once you open it, you’ll immediately understand how to use it.
-
-
-
 
 ## Features
 
